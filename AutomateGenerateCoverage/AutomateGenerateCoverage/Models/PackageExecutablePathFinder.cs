@@ -107,6 +107,11 @@
             foreach (var folder in allFoldersInCurrentDirectory)
             {
                 fileHasBeenFound = this.Search(executableFileName, folder, out pathToExecutableIncludingExecutableName);
+
+                if (fileHasBeenFound)
+                {
+                    return fileHasBeenFound;
+                }
             }
 
             return fileHasBeenFound;
