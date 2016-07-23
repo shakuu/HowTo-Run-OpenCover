@@ -52,6 +52,7 @@
     <Compile Include="Models.BatchFileGenerating\BatchFileGenerator.cs" />
     <Compile Include="Models.BatchFileGenerating\BatchFileLineGenerator.cs" />
     <Compile Include="Models.Abstract\ValidatorProvider.cs" />
+    <Compile Include="Models.IO\FileWriter.cs" />
     <Compile Include="Utils\BasicBatchFileLineParameterTypeTranslator.cs" />
     <Compile Include="Utils\BasicNugetPackageTypeTranslator.cs" />
     <Compile Include="Models\PackageExecutablePathFinder.cs" />

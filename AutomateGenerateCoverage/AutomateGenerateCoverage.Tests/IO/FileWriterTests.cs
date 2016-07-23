@@ -8,7 +8,7 @@
     using NUnit.Framework;
 
     using AutomateGenerateCoverage.Contracts.IO;
-    using AutomateGenerateCoverage.Models;
+    using AutomateGenerateCoverage.Models.IO;
 
     [TestFixture]
     public class FileWriterTests
@@ -19,7 +19,7 @@
             string fullFileNameWithPath = null;
             var dataToWrite = new List<string>();
 
-            IFileWriter fileWriter;
+            IFileWriter fileWriter = new FileWriter();
 
             Assert.Throws<ArgumentNullException>(() => fileWriter.WriteToFile(fullFileNameWithPath, dataToWrite));
         }
@@ -30,7 +30,7 @@
             string fullFileNameWithPath = "something";
             IEnumerable dataToWrite = null;
 
-            IFileWriter fileWriter;
+            IFileWriter fileWriter = new FileWriter();
 
             Assert.Throws<ArgumentNullException>(() => fileWriter.WriteToFile(fullFileNameWithPath, dataToWrite));
         }
@@ -41,9 +41,43 @@
             string fullFileNameWithPath = "something";
             var dataToWrite = new List<string>();
 
-            IFileWriter fileWriter;
+            IFileWriter fileWriter = new FileWriter();
 
             Assert.Throws<DirectoryNotFoundException>(() => fileWriter.WriteToFile(fullFileNameWithPath, dataToWrite));
+        }
+
+        [Test]
+        public void WriteToFile_ShouldThrow_IfAnyOfTheObjectsPassedInDataToWriteAreNull()
+        {
+            string fullFileNameWithPath = "D:\\Homeworks\\test.txt";
+
+            var dataToWrite = new List<string>()
+            {
+                "string",
+                null
+            };
+
+            IFileWriter fileWriter = new FileWriter();
+
+            Assert.Throws<ArgumentNullException>(() => fileWriter.WriteToFile(fullFileNameWithPath, dataToWrite));
+        }
+
+        [Test]
+        public void WriteToFile_ShouldWriteDataToFile_IfAnyOfTheObjectsPassedInDataToWriteAreNull()
+        {
+            string fullFileNameWithPath = "D:\\Homeworks\\test.txt";
+
+            var dataToWrite = new List<string>()
+            {
+                "string",
+                string.Empty
+            };
+
+            IFileWriter fileWriter = new FileWriter();
+
+            var actual = fileWriter.WriteToFile(fullFileNameWithPath, dataToWrite);
+
+            Assert.IsTrue(actual);
         }
     }
 }

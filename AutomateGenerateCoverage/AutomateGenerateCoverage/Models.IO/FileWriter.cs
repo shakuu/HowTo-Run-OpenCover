@@ -4,6 +4,7 @@
     using System.Collections;
     using System.IO;
     using System.Linq;
+    using System.Text;
 
     using AutomateGenerateCoverage.Contracts;
     using AutomateGenerateCoverage.Contracts.IO;
@@ -22,10 +23,27 @@
 
         public bool WriteToFile(string fullFileNameWithPath, IEnumerable dataToWrite)
         {
-            throw new NotImplementedException();
+            this.ValidateInputParameters(fullFileNameWithPath, dataToWrite);
+
+            try
+            {
+                using (var writer = new StreamWriter(fullFileNameWithPath))
+                {
+                    foreach (var item in dataToWrite)
+                    {
+                        writer.WriteLine(item.ToString());
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        private ValidateInputParameters(string fullFileNameWithPath, IEnumerable dataToWrite)
+        private void ValidateInputParameters(string fullFileNameWithPath, IEnumerable dataToWrite)
         {
             if (base.Validator.CheckIfStringIsNullOrEmpty(fullFileNameWithPath))
             {
@@ -45,7 +63,13 @@
                 throw new DirectoryNotFoundException(fullFileNameWithPath);
             }
 
-
+            foreach (var item in dataToWrite)
+            {
+                if (item == null)
+                {
+                    throw new ArgumentNullException(nameof(item));
+                }
+            }
         }
     }
 }
