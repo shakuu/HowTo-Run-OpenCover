@@ -1,4 +1,4 @@
-﻿namespace AutomateGenerateCoverage.Tests.BatchFileGenerating
+﻿namespace AutomateGenerateCoverage.Models.BatchFileGenerating
 {
     using System;
     using System.Collections.Generic;
@@ -6,6 +6,7 @@
 
     using AutomateGenerateCoverage.Contracts;
     using AutomateGenerateCoverage.Contracts.BatchFileGenerating;
+    using AutomateGenerateCoverage.Contracts.IO;
     using AutomateGenerateCoverage.Models.Abstract;
 
     public class BatchFileGenerator : ValidatorProvider, IBatchFileGenerator
@@ -13,24 +14,53 @@
         IRootPathFinder rootPathFinder;
         IExecutablePathFinder executablePathFinder;
         IBatchFileLineGenerator batchFileLineGenerator;
+        IFileWriter fileWriter;
 
         public BatchFileGenerator(
+            IFileWriter fileWriter,
             IRootPathFinder rootPathFinder,
             IExecutablePathFinder executablePathFinder,
             IBatchFileLineGenerator batchFileLineGenerator)
         {
+            this.FileWriter = fileWriter;
+            this.RootPathFinder = rootPathFinder;
+            this.ExecutablePathFinder = executablePathFinder;
+            this.BatchFileLineGenerator = batchFileLineGenerator;
         }
 
         public BatchFileGenerator(
+            IFileWriter fileWriter,
             IRootPathFinder rootPathFinder,
             IExecutablePathFinder executablePathFinder,
             IBatchFileLineGenerator batchFileLineGenerator,
             IValidate validator)
             : base(validator)
         {
+            this.FileWriter = fileWriter;
+            this.RootPathFinder = rootPathFinder;
+            this.ExecutablePathFinder = executablePathFinder;
+            this.BatchFileLineGenerator = batchFileLineGenerator;
         }
 
-        private IRootPathFinder RootPathFinder
+        public IFileWriter FileWriter
+        {
+            get
+            {
+                return this.fileWriter;
+            }
+
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentException(nameof(FileWriter));
+                }
+
+                this.fileWriter = value;
+            }
+        }
+
+        public IRootPathFinder RootPathFinder
         {
             get
             {
