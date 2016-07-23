@@ -7,10 +7,29 @@
 
     using AutomateGenerateCoverage.Contracts;
     using AutomateGenerateCoverage.Models;
+    using AutomateGenerateCoverage.Utils;
+
+    // TODO: How to test relative paths ?
 
     [TestFixture]
     public class RootPathFinderTests
     {
+        [Test]
+        public void ConstructorWithParameter_ShouldThrow_IfPassedANullObjectAsParameter()
+        {
+            IValidate validator = null;
+
+            Assert.Throws<ArgumentNullException>(() => new RootPathFinder(validator));
+        }
+
+        [Test]
+        public void ConstructorWithParameter_ShouldNotThrow_IfPassedAValidIValidateObjectAsParameter()
+        {
+            IValidate validator = new Validator();
+
+            Assert.DoesNotThrow(() => new RootPathFinder(validator));
+        }
+
         [Test]
         public void FindProjectRootPath_ShouldThrow_IfPassedNullArgument()
         {
