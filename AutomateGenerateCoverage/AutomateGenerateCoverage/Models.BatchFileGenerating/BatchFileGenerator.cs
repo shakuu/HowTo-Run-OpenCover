@@ -53,7 +53,7 @@
             {
                 if (value == null)
                 {
-                    throw new ArgumentException(nameof(FileWriter));
+                    throw new ArgumentNullException(nameof(FileWriter));
                 }
 
                 this.fileWriter = value;

@@ -42,12 +42,14 @@
   <ItemGroup>
     <Compile Include="Contracts\BatchFileGenerating\IBatchFileGenerator.cs" />
     <Compile Include="Contracts\BatchFileGenerating\IBatchFileLineGenerator.cs" />
+    <Compile Include="Contracts\IO\IFileWriter.cs" />
     <Compile Include="Contracts\ITypeTranslator.cs" />
     <Compile Include="Contracts\IPathFinder.cs" />
     <Compile Include="Contracts\IRootPathFinder.cs" />
     <Compile Include="Contracts\IValidate.cs" />
     <Compile Include="Enums\BatchFileLineParameterType.cs" />
     <Compile Include="Enums\NugetPackageType.cs" />
+    <Compile Include="Models.BatchFileGenerating\BatchFileGenerator.cs" />
     <Compile Include="Models.BatchFileGenerating\BatchFileLineGenerator.cs" />
     <Compile Include="Models.Abstract\ValidatorProvider.cs" />
     <Compile Include="Utils\BasicBatchFileLineParameterTypeTranslator.cs" />

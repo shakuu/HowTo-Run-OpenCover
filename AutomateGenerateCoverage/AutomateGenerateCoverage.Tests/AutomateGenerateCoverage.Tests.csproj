@@ -72,6 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BatchFileGenerating\BatchFileGeneratorTests.cs" />
     <Compile Include="BatchFileGenerating\BatchFileLineGeneratorTests.cs" />
     <Compile Include="Data\BatchFileLineGeneratorTestsData.cs" />
     <Compile Include="PathFinders\PackageExecutablePathFinderTests.cs" />
