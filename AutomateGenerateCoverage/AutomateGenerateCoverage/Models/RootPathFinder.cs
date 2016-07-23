@@ -19,16 +19,21 @@
                 throw new ArgumentNullException(nameof(pathToTestingLibrary));
             }
 
-            if (!this.validator.CheckIfFolderExistsAtInputPath(pathToTestingLibrary))
+            if (!this.validator.CheckIfFileExistsAtInputPath(pathToTestingLibrary))
             {
                 throw new FileNotFoundException(nameof(pathToTestingLibrary));
             }
 
             var pathAsArray = pathToTestingLibrary
                 .Split(new[] { '\\' }, StringSplitOptions.RemoveEmptyEntries);
-            var projectRootPath = string.Join("\\", pathAsArray.Take(pathAsArray.Length - RootPathFinder.BinFolderDepth));
+            var outputProjectRootPath = string.Join("\\", pathAsArray.Take(pathAsArray.Length - RootPathFinder.BinFolderDepth));
 
-            return projectRootPath;
+            if (!this.validator.CheckIfFolderExistsAtInputPath(outputProjectRootPath))
+            {
+                throw new DirectoryNotFoundException(nameof(outputProjectRootPath));
+            }
+
+            return outputProjectRootPath;
         }
     }
 }

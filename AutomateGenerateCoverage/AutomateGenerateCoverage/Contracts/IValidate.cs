@@ -7,5 +7,7 @@
         bool CheckIfStringIsNullOrEmpty(string str);
 
         bool CheckIfFolderExistsAtInputPath(string inputPath);
+
+        bool CheckIfFileExistsAtInputPath(string inputPath);
     }
 }
