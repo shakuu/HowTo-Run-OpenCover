@@ -5,6 +5,6 @@
 
     public interface IBatchFileGenerator
     {
-        IEnumerable<FileInfo> GenereteBatchFiles(string inputPathToTestingLibrary, IEnumerable<string> outputFilenames);
+        IEnumerable<FileInfo> GenereteBatchFiles(string inputPathToTestingLibrary, string targetDirectory, IList<string> outputFilenames);
     }
 }

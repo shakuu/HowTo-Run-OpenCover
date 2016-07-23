@@ -123,6 +123,8 @@
                 executablePathFinder,
                 batchFileLineGenerator);
 
+            string targetDirectory = "D:\\Homeworkds";
+
             string path = null;
 
             var outputFilenames = new List<string>()
@@ -131,7 +133,7 @@
                 "thing"
             };
 
-            Assert.Throws<ArgumentNullException>(() => generateBatchFile.GenereteBatchFiles(path, outputFilenames));
+            Assert.Throws<ArgumentNullException>(() => generateBatchFile.GenereteBatchFiles(path, targetDirectory, outputFilenames));
         }
 
         [Test]
@@ -150,6 +152,8 @@
                 executablePathFinder,
                 batchFileLineGenerator);
 
+            string targetDirectory = "D:\\Homeworkds";
+
             string path = "some\\random\\path";
 
             var outputFilenames = new List<string>()
@@ -158,7 +162,7 @@
                 "thing"
             };
 
-            Assert.Throws<FileNotFoundException>(() => generateBatchFile.GenereteBatchFiles(path, outputFilenames));
+            Assert.Throws<FileNotFoundException>(() => generateBatchFile.GenereteBatchFiles(path, targetDirectory, outputFilenames));
         }
 
         [Test]
@@ -177,11 +181,13 @@
                 executablePathFinder,
                 batchFileLineGenerator);
 
+            string targetDirectory = "D:\\Homeworkds";
+
             string path = "D:\\Homeworks\\test.txt";
 
-            IEnumerable<string> outputFilenames = null;
+            IList<string> outputFilenames = null;
 
-            Assert.Throws<ArgumentNullException>(() => generateBatchFile.GenereteBatchFiles(path, outputFilenames));
+            Assert.Throws<ArgumentNullException>(() => generateBatchFile.GenereteBatchFiles(path, targetDirectory, outputFilenames));
         }
 
         [Test]
@@ -199,7 +205,8 @@
                 rootPathFinder,
                 executablePathFinder,
                 batchFileLineGenerator);
-            
+
+            string targetDirectory = "D:\\Homeworkds";
             string path = "D:\\Homeworks\\test.txt";
 
             var outputFilenames = new List<string>()
@@ -208,7 +215,40 @@
                 string.Empty
             };
 
-            Assert.Throws<ArgumentNullException>(() => generateBatchFile.GenereteBatchFiles(path, outputFilenames));
+            Assert.Throws<ArgumentNullException>(() => generateBatchFile.GenereteBatchFiles(path, targetDirectory, outputFilenames));
+        }
+
+        [Test]
+        public void GenerateBatchFiles_ShouldReturnTwoExistingFileNames_IfPassedValidInput()
+        {
+            var fileWriter = new FileWriter();
+            var rootPathFinder = new RootPathFinder();
+            var executableTypeTranslator = new BasicNugetPackageTypeTranslator();
+            var executablePathFinder = new PackageExecutablePathFinder(executableTypeTranslator);
+            var batchFileParameterTypeTranslator = new BasicBatchFileLineParameterTypeTranslator();
+            var batchFileLineGenerator = new BatchFileLineGenerator(batchFileParameterTypeTranslator);
+
+            var generateBatchFile = new BatchFileGenerator(
+                fileWriter,
+                rootPathFinder,
+                executablePathFinder,
+                batchFileLineGenerator);
+
+            string targetDirectory = @"D:\Homeworks\results";
+            string path = @"D:\GitHub\HowTo-Run-OpenCover\AutomateGenerateCoverage\AutomateGenerateCoverage.Tests\bin\Debug\AutomateGenerateCoverage.Tests.dll";
+
+            var outputFilenames = new List<string>()
+            {
+                @"D:\Homeworks\runtests.bat",
+                @"D:\Homeworks\getresults.bat"
+            };
+
+            var actualResult = generateBatchFile.GenereteBatchFiles(path, targetDirectory, outputFilenames);
+
+            foreach (var fildePath in actualResult)
+            {
+                Assert.IsTrue(File.Exists(fildePath.FullName));
+            }
         }
     }
 }

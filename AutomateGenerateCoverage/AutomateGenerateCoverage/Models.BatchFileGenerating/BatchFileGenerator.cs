@@ -8,9 +8,13 @@
     using AutomateGenerateCoverage.Contracts.BatchFileGenerating;
     using AutomateGenerateCoverage.Contracts.IO;
     using AutomateGenerateCoverage.Models.Abstract;
+    using AutomateGenerateCoverage.Enums;
 
     public class BatchFileGenerator : ValidatorProvider, IBatchFileGenerator
     {
+        private const string RegisterValue = "user";
+        private const string ReportsValue = "results.xml";
+
         IRootPathFinder rootPathFinder;
         IExecutablePathFinder executablePathFinder;
         IBatchFileLineGenerator batchFileLineGenerator;
@@ -114,12 +118,94 @@
             }
         }
 
-        public IEnumerable<FileInfo> GenereteBatchFiles(string inputPathToTestingLibrary, IEnumerable<string> outputFilenames)
+        public IEnumerable<FileInfo> GenereteBatchFiles(string inputPathToTestingLibrary, string targetDirectory, IList<string> outputFilenames)
         {
+            var batchFileLines = new List<string>();
+
             this.ValidateGenerateBatchFilesInputFilePath(inputPathToTestingLibrary);
             this.ValidateGenerateBatchFilesOutputFilenames(outputFilenames);
-            
-            throw new NotImplementedException();
+
+            var testingLibraryAsFileInfo = new FileInfo(inputPathToTestingLibrary);
+            var projectRootDirectory = this.RootPathFinder.FindProjectRootPath(inputPathToTestingLibrary);
+            var nUnitExecutableFilePath = this.executablePathFinder.FindPathToExecutable(NugetPackageType.NUnit, projectRootDirectory);
+            var openCoverExecutableFilePath = this.executablePathFinder.FindPathToExecutable(NugetPackageType.OpenCover, projectRootDirectory);
+            var reportGeneratorExecutableFilePath = this.executablePathFinder.FindPathToExecutable(NugetPackageType.ReportGenerator, projectRootDirectory);
+
+            batchFileLines.Add(this.GenerateLineFileOneLineOne(nUnitExecutableFilePath, testingLibraryAsFileInfo.FullName));
+            batchFileLines.Add(this.GenerateLineFileTwoLineOne(openCoverExecutableFilePath, outputFilenames[0]));
+            batchFileLines.Add(this.GenerateLineFileTwoLineTwo(reportGeneratorExecutableFilePath, targetDirectory));
+
+            this.FileWriter.WriteToFile(outputFilenames[0], new List<string>() { batchFileLines[0] });
+            this.FileWriter.WriteToFile(outputFilenames[1], new List<string>() { batchFileLines[1], batchFileLines[2] });
+
+            var outputFilesInfo = new List<FileInfo>()
+            {
+                new FileInfo(outputFilenames[0]),
+                new FileInfo(outputFilenames[1])
+            };
+
+            return outputFilesInfo;
+        }
+
+        private string GenerateLineFileOneLineOne(string nUnitExecutablePath, string testingLibraryFileName)
+        {
+            var parameters = new List<BatchFileLineParameterType>()
+            {
+                BatchFileLineParameterType.PackageExecutablePath,
+                BatchFileLineParameterType.TestsLibraryName
+            };
+
+            var values = new List<string>()
+            {
+                nUnitExecutablePath,
+                testingLibraryFileName
+            };
+
+            var fileOneLineOne = this.BatchFileLineGenerator.GenerateBatchFileLine(parameters, values);
+
+            return fileOneLineOne;
+        }
+
+        private string GenerateLineFileTwoLineOne(string openCoverExecutablePath, string outputFilenameTests)
+        {
+            var parameters = new List<BatchFileLineParameterType>()
+            {
+                BatchFileLineParameterType.PackageExecutablePath,
+                BatchFileLineParameterType.Target,
+                BatchFileLineParameterType.Register
+            };
+
+            var values = new List<string>()
+            {
+                openCoverExecutablePath,
+                outputFilenameTests,
+                BatchFileGenerator.RegisterValue
+            };
+
+            var fileTwoLineOne = this.BatchFileLineGenerator.GenerateBatchFileLine(parameters, values);
+
+            return fileTwoLineOne;
+        }
+
+        private string GenerateLineFileTwoLineTwo(string reportGeneratorExecutablePath, string targetDirectory)
+        {
+            var parameters = new List<BatchFileLineParameterType>()
+            {
+                BatchFileLineParameterType.PackageExecutablePath,
+                BatchFileLineParameterType.Reports,
+                BatchFileLineParameterType.TargetDir
+            };
+
+            var values = new List<string>()
+            {
+                reportGeneratorExecutablePath,
+                BatchFileGenerator.ReportsValue,
+                targetDirectory
+            };
+
+            var fileTwoLineTwo = this.BatchFileLineGenerator.GenerateBatchFileLine(parameters, values);
+
+            return fileTwoLineTwo;
         }
 
         private void ValidateGenerateBatchFilesInputFilePath(string inputPathToTestingLibrary)
