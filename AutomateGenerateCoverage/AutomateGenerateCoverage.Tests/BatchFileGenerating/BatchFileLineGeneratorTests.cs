@@ -11,6 +11,8 @@
     using AutomateGenerateCoverage.Enums;
     using AutomateGenerateCoverage.Utils;
 
+    using AutomateGenerateCoverage.Tests.Data;
+
     [TestFixture]
     public class BatchFileLineGeneratorTests
     {
@@ -91,5 +93,17 @@
             Assert.Throws<ArgumentException>(() => lineGenerator.GenerateBatchFileLine(parameters, values));
         }
 
+        [Test]
+        [TestCaseSource(typeof(BatchFileLineGeneratorTestsData), "GenerateBatchFileLineTestCases")]
+        public string GenerateBatchFileLine_ShouldReturnACorrectString_IfPassedCorrectParameters(IList<BatchFileLineParameterType> parameters, IList<string> values)
+        {
+            var batchFileParameterTranslator = new BasicBatchFileLineParameterTypeTranslator();
+
+            IBatchFileLineGenerator lineGenerator = new BatchFileLineGenerator(batchFileParameterTranslator);
+
+            var actualResult = lineGenerator.GenerateBatchFileLine(parameters, values);
+
+            return actualResult;
+        }
     }
 }

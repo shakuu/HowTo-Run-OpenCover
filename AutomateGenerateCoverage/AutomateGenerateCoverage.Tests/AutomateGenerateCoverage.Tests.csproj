@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BatchFileGenerating\BatchFileLineGeneratorTests.cs" />
+    <Compile Include="Data\BatchFileLineGeneratorTestsData.cs" />
     <Compile Include="PathFinders\PackageExecutablePathFinderTests.cs" />
     <Compile Include="PathFinders\RootPathFinderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
