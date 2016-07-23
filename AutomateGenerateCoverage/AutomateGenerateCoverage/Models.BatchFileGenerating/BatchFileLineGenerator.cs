@@ -43,18 +43,22 @@
             }
         }
 
-        public string GenerateBatchFileLine(ICollection<BatchFileLineParameterType> parameters, ICollection<string> values)
+        public string GenerateBatchFileLine(IList<BatchFileLineParameterType> parameters, IList<string> values)
         {
-            var batchFileLineOutput = new StringBuilder();
+            var batchFileLineOutputWords = new List<string>();
 
             this.ValidateInputParameters(parameters, values);
 
-            for (int index = 0; index < parameters.Count; index++)
+            for (int i = 0; i < parameters.Count; i++)
             {
+                var currentParameter = this.batchFileLineParameterTypeTranslator.GetTranslatedValue((int)parameters[i]);
 
+                var wordToAdd = currentParameter + values[i];
+
+                batchFileLineOutputWords.Add(wordToAdd);
             }
 
-            throw new NotImplementedException();
+            return string.Join(" ", batchFileLineOutputWords);
         }
 
         private void ValidateInputParameters(ICollection<BatchFileLineParameterType> parameters, ICollection<string> values)

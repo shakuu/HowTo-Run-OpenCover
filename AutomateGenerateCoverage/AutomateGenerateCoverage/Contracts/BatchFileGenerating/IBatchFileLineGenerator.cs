@@ -6,6 +6,6 @@
 
     public interface IBatchFileLineGenerator 
     {
-        string GenerateBatchFileLine(ICollection<BatchFileLineParameterType> parameters, ICollection<string> values);
+        string GenerateBatchFileLine(IList<BatchFileLineParameterType> parameters, IList<string> values);
     }
 }

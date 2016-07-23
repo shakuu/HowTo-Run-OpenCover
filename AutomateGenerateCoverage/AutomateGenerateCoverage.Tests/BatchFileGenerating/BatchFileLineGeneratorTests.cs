@@ -25,8 +25,8 @@
         [Test]
         public void GenerateBatchFileLine_ShouldThrow_IfParametersIsNull()
         {
-            ICollection<BatchFileLineParameterType> parameters = null;
-            ICollection<string> values = new List<string>();
+            IList<BatchFileLineParameterType> parameters = null;
+            IList<string> values = new List<string>();
             var batchFileParameterTranslator = new BasicBatchFileLineParameterTypeTranslator();
 
             IBatchFileLineGenerator lineGenerator = new BatchFileLineGenerator(batchFileParameterTranslator);
@@ -37,8 +37,8 @@
         [Test]
         public void GenerateBatchFileLine_ShouldThrow_IfValuesIsNull()
         {
-            ICollection<BatchFileLineParameterType> parameters = new List<BatchFileLineParameterType>();
-            ICollection<string> values = null;
+            IList<BatchFileLineParameterType> parameters = new List<BatchFileLineParameterType>();
+            IList<string> values = null;
             var batchFileParameterTranslator = new BasicBatchFileLineParameterTypeTranslator();
 
             IBatchFileLineGenerator lineGenerator = new BatchFileLineGenerator(batchFileParameterTranslator);
