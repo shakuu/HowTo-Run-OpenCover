@@ -5,20 +5,31 @@
 
     using NUnit.Framework;
 
+    using AutomateGenerateCoverage.Contracts;
     using AutomateGenerateCoverage.Contracts.BatchFileGenerating;
     using AutomateGenerateCoverage.Models.BatchFileGenerating;
     using AutomateGenerateCoverage.Enums;
+    using AutomateGenerateCoverage.Utils;
 
     [TestFixture]
     public class BatchFileLineGeneratorTests
     {
         [Test]
+        public void Constructor_ShouldThrow_IfPassedANullITypeTranslator()
+        {
+            ITypeTranslator batchFileParameterTranslator = null;
+
+            Assert.Throws<ArgumentNullException>(() => new BatchFileLineGenerator(batchFileParameterTranslator));
+        }
+
+        [Test]
         public void GenerateBatchFileLine_ShouldThrow_IfParametersIsNull()
         {
             ICollection<BatchFileLineParameterType> parameters = null;
             ICollection<string> values = new List<string>();
+            var batchFileParameterTranslator = new BasicBatchFileLineParameterTypeTranslator();
 
-            IBatchFileLineGenerator lineGenerator = new BatchFileLineGenerator();
+            IBatchFileLineGenerator lineGenerator = new BatchFileLineGenerator(batchFileParameterTranslator);
 
             Assert.Throws<ArgumentNullException>(() => lineGenerator.GenerateBatchFileLine(parameters, values));
         }
@@ -28,8 +39,9 @@
         {
             ICollection<BatchFileLineParameterType> parameters = new List<BatchFileLineParameterType>();
             ICollection<string> values = null;
+            var batchFileParameterTranslator = new BasicBatchFileLineParameterTypeTranslator();
 
-            IBatchFileLineGenerator lineGenerator = new BatchFileLineGenerator();
+            IBatchFileLineGenerator lineGenerator = new BatchFileLineGenerator(batchFileParameterTranslator);
 
             Assert.Throws<ArgumentNullException>(() => lineGenerator.GenerateBatchFileLine(parameters, values));
         }
@@ -49,7 +61,9 @@
                 string.Empty
             };
 
-            IBatchFileLineGenerator lineGenerator = new BatchFileLineGenerator();
+            var batchFileParameterTranslator = new BasicBatchFileLineParameterTypeTranslator();
+
+            IBatchFileLineGenerator lineGenerator = new BatchFileLineGenerator(batchFileParameterTranslator);
 
             Assert.Throws<ArgumentNullException>(() => lineGenerator.GenerateBatchFileLine(parameters, values));
         }
@@ -70,7 +84,9 @@
                 "more than"
             };
 
-            IBatchFileLineGenerator lineGenerator = new BatchFileLineGenerator();
+            var batchFileParameterTranslator = new BasicBatchFileLineParameterTypeTranslator();
+
+            IBatchFileLineGenerator lineGenerator = new BatchFileLineGenerator(batchFileParameterTranslator);
 
             Assert.Throws<ArgumentException>(() => lineGenerator.GenerateBatchFileLine(parameters, values));
         }
