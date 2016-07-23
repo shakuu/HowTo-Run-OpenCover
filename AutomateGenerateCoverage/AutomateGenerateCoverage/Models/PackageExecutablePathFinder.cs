@@ -7,6 +7,7 @@
     using AutomateGenerateCoverage.Contracts;
     using AutomateGenerateCoverage.Models.Abstract;
     using AutomateGenerateCoverage.Enums;
+    using AutomateGenerateCoverage.Utils;
 
     public class PackageExecutablePathFinder : PathFinder, IExecutablePathFinder
     {
@@ -29,7 +30,7 @@
             {
                 if (this.nugetPackageTypeTranslator == null)
                 {
-                    //this.nugetPackageTypeTranslator = new ? 
+                    this.nugetPackageTypeTranslator = new BasicNugetPackageTypeTranslator();
                 }
 
                 return this.nugetPackageTypeTranslator;
@@ -37,6 +38,11 @@
 
             set
             {
+                if (value == null)
+                {
+                    throw new ArgumentException("PackageExecutablePathFinder.NugetPackageTypeTranslater");
+                }
+
                 this.nugetPackageTypeTranslator = value;
             }
         }
@@ -57,11 +63,28 @@
 
             var executableFileName = this.NugetPackageTypeTranslator.GetTranslatedValue((int)nugetPackageTypeValue);
 
-            throw new NotImplementedException();
+            var searchHasBeenSucssessful = this.Search(executableFileName, projectRootDirectory, out pathToExecutableIncludingExecutableName);
+
+            if (!searchHasBeenSucssessful)
+            {
+                throw new FileNotFoundException(nugetPackageTypeValue.ToString());
+            }
+
+            return pathToExecutableIncludingExecutableName;
         }
 
-        private bool Search(string executableFileName, string currentPath, out string pathToExecutablepathToExecutableIncludingExecutableName)
+        /// <summary>
+        /// Recursive search through all directories till the file name is found.
+        /// </summary>
+        /// <param name="executableFileName"></param>
+        /// <param name="currentPath"></param>
+        /// <param name="pathToExecutableIncludingExecutableName"></param>
+        /// <returns>string containing the full path to the file searched for</returns>
+        private bool Search(string executableFileName, string currentPath, out string pathToExecutableIncludingExecutableName)
         {
+            var fileHasBeenFound = false;
+
+            pathToExecutableIncludingExecutableName = null;
             var allFilesInCurrentDirectory = Directory.GetFiles(currentPath);
             var allFoldersInCurrentDirectory = Directory.GetDirectories(currentPath);
 
@@ -73,13 +96,20 @@
                 {
                     continue;
                 }
-                else if (fileName.Contains(executableFileName))
+                else if (fileName == executableFileName)
                 {
-
+                    pathToExecutableIncludingExecutableName = file;
+                    fileHasBeenFound = true;
+                    return fileHasBeenFound;
                 }
             }
 
-            throw new NotImplementedException();
+            foreach (var folder in allFoldersInCurrentDirectory)
+            {
+                fileHasBeenFound = this.Search(executableFileName, folder, out pathToExecutableIncludingExecutableName);
+            }
+
+            return fileHasBeenFound;
         }
     }
 }

@@ -34,7 +34,7 @@
         public void FindPathToExecutable_ShouldThrow_IfPackageIsNotSet()
         {
             this.package = NugetPackageType.NotSet;
-            this.projectRootDirectory = "some\\directory";
+            this.projectRootDirectory = "D:\\Github";
             this.nugetPackageTranslator = new BasicNugetPackageTypeTranslator();
 
             this.packageExecutablePathFinder = new PackageExecutablePathFinder(nugetPackageTranslator);
