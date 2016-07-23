@@ -21,5 +21,18 @@
 
             Assert.Throws<ArgumentException>(() => typeTranslator.GetTranslatedValue((int)typeValue));
         }
+
+        [Test]
+        [TestCase(NugetPackageType.NUnit, ExpectedResult = "nunit3-console.exe")]
+        [TestCase(NugetPackageType.OpenCover, ExpectedResult = "OpenCover.Console.exe")]
+        [TestCase(NugetPackageType.ReportGenerator, ExpectedResult = "ReportGenerator.exe")]
+        public string GetTranslatedValue_ShouldReturnTheCorrectString(NugetPackageType packageType)
+        {
+            this.typeTranslator = new BasicNugetPackageTypeTranslator();
+
+            var actualResult = typeTranslator.GetTranslatedValue((int)packageType);
+
+            return actualResult;
+        }
     }
 }
