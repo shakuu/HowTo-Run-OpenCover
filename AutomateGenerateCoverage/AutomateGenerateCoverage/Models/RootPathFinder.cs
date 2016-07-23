@@ -5,13 +5,11 @@
     using System.Linq;
 
     using AutomateGenerateCoverage.Contracts;
-    using AutomateGenerateCoverage.Utils;
+    using AutomateGenerateCoverage.Models.Abstract;
 
-    public class RootPathFinder : IRootPathFinder
+    public class RootPathFinder : PathFinder, IRootPathFinder
     {
         private const int PathToLibraryFolderDepth = 4;
-
-        private IValidate validator;
 
         public RootPathFinder()
         {
@@ -19,34 +17,8 @@
         }
 
         public RootPathFinder(IValidate validator)
+            : base(validator)
         {
-            this.Validator = validator;
-        }
-
-        /// <summary>
-        /// Initialize default validator if none is passed.
-        /// </summary>
-        private IValidate Validator
-        {
-            get
-            {
-                if (this.validator == null)
-                {
-                    this.validator = new Validator();
-                }
-
-                return this.validator;
-            }
-
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException();
-                }
-
-                this.validator = value;
-            }
         }
 
         public string FindProjectRootPath(string pathToTestingLibrary)
