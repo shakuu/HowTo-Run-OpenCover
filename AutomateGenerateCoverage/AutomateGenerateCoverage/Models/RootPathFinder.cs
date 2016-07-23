@@ -5,15 +5,18 @@
     using System.Linq;
 
     using AutomateGenerateCoverage.Contracts;
+    using AutomateGenerateCoverage.Utils;
 
     public class RootPathFinder : IRootPathFinder
     {
-        private const int BinFolderDepth = 3;
+        private const int BinFolderDepth = 4;
 
         private IValidate validator;
 
         public string FindProjectRootPath(string pathToTestingLibrary)
         {
+            this.InitializeValidator(new Validator());
+
             if (this.validator.CheckIfStringIsNullOrEmpty(pathToTestingLibrary))
             {
                 throw new ArgumentNullException(nameof(pathToTestingLibrary));
@@ -33,7 +36,18 @@
                 throw new DirectoryNotFoundException(nameof(outputProjectRootPath));
             }
 
+            this.DestroyValidator();
             return outputProjectRootPath;
+        }
+
+        private void InitializeValidator(IValidate validator)
+        {
+            this.validator = validator;
+        }
+
+        private void DestroyValidator()
+        {
+            this.validator = null;
         }
     }
 }

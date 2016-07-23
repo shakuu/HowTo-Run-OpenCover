@@ -32,7 +32,7 @@
         [Test]
         public void FindProjectRootPath_ShouldThrow_IfNewlyGenerateFolderDoesNotExist()
         {
-            var pathToTestingLibrary = "some:\\werid\\folder";
+            var pathToTestingLibrary = @"D:\SamplePeople.csv";
             IRootPathFinder rootPathFinder = new RootPathFinder();
 
             Assert.Throws<DirectoryNotFoundException>(() => rootPathFinder.FindProjectRootPath(pathToTestingLibrary));
