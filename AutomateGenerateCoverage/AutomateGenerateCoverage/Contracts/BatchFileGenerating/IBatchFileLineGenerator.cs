@@ -1,10 +1,10 @@
-﻿namespace AutomateGenerateCoverage.Contracts
+﻿namespace AutomateGenerateCoverage.Contracts.BatchFileGenerating
 {
     using System.Collections.Generic;
 
     using AutomateGenerateCoverage.Enums;
 
-    public interface IBatchFileLineGenerator
+    public interface IBatchFileLineGenerator 
     {
         string GenerateBatchFileLine(IEnumerable<BatchFileLineParameterType> parameters, IEnumerable<string> values);
     }

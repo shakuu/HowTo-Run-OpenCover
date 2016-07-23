@@ -1,4 +1,4 @@
-﻿namespace AutomateGenerateCoverage.Contracts
+﻿namespace AutomateGenerateCoverage.Contracts.BatchFileGenerating
 {
     using System.Collections.Generic;
     using System.IO;
