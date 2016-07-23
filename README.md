@@ -9,8 +9,8 @@
    - tests.bat 
       - <path to Nunit console runner> <tests.dll>
    - report.bat
-      - <path to OpenCover> -target:tests.bat -register:user
-      - <path to ReportGenerator> -target:tests.bat -reports:results.xml -targetdir:coverage
+      - <path to OpenCover> -target:runtests.bat -register:user
+      - <path to ReportGenerator> -reports:results.xml -targetdir:coverage
     
 
 
