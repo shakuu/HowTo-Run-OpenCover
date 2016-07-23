@@ -9,7 +9,7 @@
     using AutomateGenerateCoverage.Enums;
     using AutomateGenerateCoverage.Utils;
 
-    public class PackageExecutablePathFinder : PathFinder, IExecutablePathFinder
+    public class PackageExecutablePathFinder : ValidatorProvider, IExecutablePathFinder
     {
         ITypeTranslator nugetPackageTypeTranslator;
 

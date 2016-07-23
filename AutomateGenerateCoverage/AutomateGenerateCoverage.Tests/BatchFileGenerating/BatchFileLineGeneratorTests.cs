@@ -6,7 +6,7 @@
     using NUnit.Framework;
 
     using AutomateGenerateCoverage.Contracts.BatchFileGenerating;
-    using AutomateGenerateCoverage.Models;
+    using AutomateGenerateCoverage.Models.BatchFileGenerating;
     using AutomateGenerateCoverage.Enums;
 
     [TestFixture]
@@ -15,10 +15,10 @@
         [Test]
         public void GenerateBatchFileLine_ShouldThrow_IfParametersIsNull()
         {
-            IEnumerable<BatchFileLineParameterType> parameters = null;
-            IEnumerable<string> values = new List<string>();
+            ICollection<BatchFileLineParameterType> parameters = null;
+            ICollection<string> values = new List<string>();
 
-            IBatchFileLineGenerator lineGenerator;
+            IBatchFileLineGenerator lineGenerator = new BatchFileLineGenerator();
 
             Assert.Throws<ArgumentNullException>(() => lineGenerator.GenerateBatchFileLine(parameters, values));
         }
@@ -26,10 +26,10 @@
         [Test]
         public void GenerateBatchFileLine_ShouldThrow_IfValuesIsNull()
         {
-            IEnumerable<BatchFileLineParameterType> parameters = new List<BatchFileLineParameterType>();
-            IEnumerable<string> values = null;
+            ICollection<BatchFileLineParameterType> parameters = new List<BatchFileLineParameterType>();
+            ICollection<string> values = null;
 
-            IBatchFileLineGenerator lineGenerator;
+            IBatchFileLineGenerator lineGenerator = new BatchFileLineGenerator();
 
             Assert.Throws<ArgumentNullException>(() => lineGenerator.GenerateBatchFileLine(parameters, values));
         }
@@ -49,7 +49,7 @@
                 string.Empty
             };
 
-            IBatchFileLineGenerator lineGenerator;
+            IBatchFileLineGenerator lineGenerator = new BatchFileLineGenerator();
 
             Assert.Throws<ArgumentNullException>(() => lineGenerator.GenerateBatchFileLine(parameters, values));
         }
@@ -70,9 +70,9 @@
                 "more than"
             };
 
-            IBatchFileLineGenerator lineGenerator;
+            IBatchFileLineGenerator lineGenerator = new BatchFileLineGenerator();
 
-            Assert.Throws<ArgumentNullException>(() => lineGenerator.GenerateBatchFileLine(parameters, values));
+            Assert.Throws<ArgumentException>(() => lineGenerator.GenerateBatchFileLine(parameters, values));
         }
 
     }

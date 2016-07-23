@@ -40,14 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\IBatchFileLineGenerator.cs" />
+    <Compile Include="Contracts\BatchFileGenerating\IBatchFileGenerator.cs" />
+    <Compile Include="Contracts\BatchFileGenerating\IBatchFileLineGenerator.cs" />
     <Compile Include="Contracts\ITypeTranslator.cs" />
     <Compile Include="Contracts\IPathFinder.cs" />
     <Compile Include="Contracts\IRootPathFinder.cs" />
     <Compile Include="Contracts\IValidate.cs" />
     <Compile Include="Enums\BatchFileLineParameterType.cs" />
     <Compile Include="Enums\NugetPackageType.cs" />
-    <Compile Include="Models\Abstract\PathFinder.cs" />
+    <Compile Include="Models.BatchFileGenerating\BatchFileLineGenerator.cs" />
+    <Compile Include="Models.Abstract\ValidatorProvider.cs" />
     <Compile Include="Utils\BasicBatchFileLineParameterTypeTranslator.cs" />
     <Compile Include="Utils\BasicNugetPackageTypeTranslator.cs" />
     <Compile Include="Models\PackageExecutablePathFinder.cs" />

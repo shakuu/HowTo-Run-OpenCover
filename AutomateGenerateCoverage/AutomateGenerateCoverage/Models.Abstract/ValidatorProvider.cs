@@ -5,16 +5,16 @@
     using AutomateGenerateCoverage.Contracts;
     using AutomateGenerateCoverage.Utils;
 
-    public abstract class PathFinder
+    public abstract class ValidatorProvider
     {
         private IValidate validator;
 
-        public PathFinder()
+        public ValidatorProvider()
         {
 
         }
 
-        public PathFinder(IValidate validator)
+        public ValidatorProvider(IValidate validator)
         {
             this.Validator = validator;
         }

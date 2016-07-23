@@ -7,7 +7,7 @@
     using AutomateGenerateCoverage.Contracts;
     using AutomateGenerateCoverage.Models.Abstract;
 
-    public class RootPathFinder : PathFinder, IRootPathFinder
+    public class RootPathFinder : ValidatorProvider, IRootPathFinder
     {
         private const int PathToLibraryFolderDepth = 4;
 
