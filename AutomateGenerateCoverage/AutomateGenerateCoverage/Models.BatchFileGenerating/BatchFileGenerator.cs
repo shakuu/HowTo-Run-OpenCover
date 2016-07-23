@@ -114,9 +114,41 @@
             }
         }
 
-        public IEnumerable<FileInfo> GenereteBatchFiles(string inputPathToTestingLibrary)
+        public IEnumerable<FileInfo> GenereteBatchFiles(string inputPathToTestingLibrary, IEnumerable<string> outputFilenames)
         {
+            this.ValidateGenerateBatchFilesInputFilePath(inputPathToTestingLibrary);
+            this.ValidateGenerateBatchFilesOutputFilenames(outputFilenames);
+            
             throw new NotImplementedException();
+        }
+
+        private void ValidateGenerateBatchFilesInputFilePath(string inputPathToTestingLibrary)
+        {
+            if (base.Validator.CheckIfStringIsNullOrEmpty(inputPathToTestingLibrary))
+            {
+                throw new ArgumentNullException(nameof(inputPathToTestingLibrary));
+            }
+
+            if (!base.Validator.CheckIfFileExistsAtInputPath(inputPathToTestingLibrary))
+            {
+                throw new FileNotFoundException(inputPathToTestingLibrary);
+            }
+        }
+
+        private void ValidateGenerateBatchFilesOutputFilenames(IEnumerable<string> outputFilenames)
+        {
+            if (base.Validator.CheckIfObjectIsNull(outputFilenames))
+            {
+                throw new ArgumentNullException(nameof(outputFilenames));
+            }
+
+            foreach (var str in outputFilenames)
+            {
+                if (base.Validator.CheckIfStringIsNullOrEmpty(str))
+                {
+                    throw new ArgumentNullException(nameof(outputFilenames));
+                }
+            }
         }
     }
 }
