@@ -2,7 +2,7 @@
 {
     using AutomateGenerateCoverage.Enums;
 
-    public interface IPathFinder
+    public interface IExecutablePathFinder
     {
         string FindPathToExecutable(NugetPackageType package, string projectRootDirectory);
     }
