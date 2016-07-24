@@ -25,9 +25,9 @@
                 throw new ArgumentNullException();
             }
 
-            if (!base.Validator.CheckIfFileExistsAtInputPath(path))
+            if (!base.Validator.CheckIfFolderExistsAtInputPath(path))
             {
-                throw new FileNotFoundException(path);
+                throw new DirectoryNotFoundException(path);
             }
 
             var result = new FileInfo(path);

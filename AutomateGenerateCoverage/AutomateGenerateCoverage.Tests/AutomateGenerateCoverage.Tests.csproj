@@ -75,6 +75,7 @@
     <Compile Include="BatchFileGenerating\BatchFileGeneratorTests.cs" />
     <Compile Include="BatchFileGenerating\BatchFileLineGeneratorTests.cs" />
     <Compile Include="Data\BatchFileLineGeneratorTestsData.cs" />
+    <Compile Include="FolderManagers\BasicFolderManagerTests.cs" />
     <Compile Include="IO\FileWriterTests.cs" />
     <Compile Include="PathFinders\PackageExecutablePathFinderTests.cs" />
     <Compile Include="PathFinders\RootPathFinderTests.cs" />

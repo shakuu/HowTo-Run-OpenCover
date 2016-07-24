@@ -1,5 +1,6 @@
 ﻿namespace AutomateGenerateCoverage.Models.Reports
 {
+    using System;
     using System.IO;
 
     using AutomateGenerateCoverage.Contracts;
@@ -14,8 +15,8 @@
 
         public Report(string testingDllLocation, string reportHTMLLocation)
         {
-            var testingDllLocationFileInfo = base.ConverToFileInfo(testingDllLocation);
-            var reportHTMLLocationFileInfo = base.ConverToFileInfo(reportHTMLLocation);
+            var testingDllLocationFileInfo = this.ConverToFileInfo(testingDllLocation);
+            var reportHTMLLocationFileInfo = this.ConverToFileInfo(reportHTMLLocation);
 
             this.TestingDLL = testingDllLocationFileInfo;
             this.ReportHTML = reportHTMLLocationFileInfo;
@@ -55,6 +56,22 @@
             {
                 this.reportHTML = value;
             }
+        }
+
+        protected override FileInfo ConverToFileInfo(string path)
+        {
+            if (base.Validator.CheckIfStringIsNullOrEmpty(path))
+            {
+                throw new ArgumentNullException();
+            }
+
+            if (!base.Validator.CheckIfFileExistsAtInputPath(path))
+            {
+                throw new FileNotFoundException(path);
+            }
+
+            var result = new FileInfo(path);
+            return result;
         }
     }
 }

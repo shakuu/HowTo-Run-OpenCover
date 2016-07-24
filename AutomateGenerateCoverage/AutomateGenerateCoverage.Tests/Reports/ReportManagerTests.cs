@@ -5,7 +5,9 @@
 
     using NUnit.Framework;
 
+    using AutomateGenerateCoverage.Contracts.Reports;
     using AutomateGenerateCoverage.Models.Reports;
+    using AutomateGenerateCoverage.Models.Reports.FolderManagers;
 
     [TestFixture]
     public class ReportManagerTests
@@ -13,25 +15,18 @@
         [Test]
         public void Constructor_ShouldThrow_IfReportsRootDirctoryIsNullOrEmpty()
         {
-            string reportsRootDirectory = null;
+            IFolderManager folderManager = null;
 
-            Assert.Throws<ArgumentNullException>(() => new ReportManager(reportsRootDirectory));
-        }
-
-        [Test]
-        public void Constructor_ShouldThrow_IfReportsRootDirctoryCannotBeFound()
-        {
-            var reportsRootDirectory = "random\\folder";
-
-            Assert.Throws<DirectoryNotFoundException>(() => new ReportManager(reportsRootDirectory));
+            Assert.Throws<ArgumentNullException>(() => new ReportManager(folderManager));
         }
 
         [Test]
         public void Constructor_ShouldInitializeCorrectly_IfPassedAValidPath()
         {
             var reportsRootDirectory = "D:\\Homeworks";
+            var folderManger = new BasicFolderManager(reportsRootDirectory);
 
-            var actualResult = new ReportManager(reportsRootDirectory);
+            var actualResult = new ReportManager(folderManger);
 
             Assert.NotNull(actualResult);
         }
@@ -42,7 +37,8 @@
             string testingDllDirectory = null;
 
             var reportsRootDirectory = "D:\\Homeworks";
-            var reportManager = new ReportManager(reportsRootDirectory);
+            var folderManger = new BasicFolderManager(reportsRootDirectory);
+            var reportManager = new ReportManager(folderManger);
 
             Assert.Throws<ArgumentNullException>(() => reportManager.GenerateReport(testingDllDirectory));
         }
@@ -53,7 +49,8 @@
             var testingDllDirectory = "random\\folder";
 
             var reportsRootDirectory = "D:\\Homeworks";
-            var reportManager = new ReportManager(reportsRootDirectory);
+            var folderManger = new BasicFolderManager(reportsRootDirectory);
+            var reportManager = new ReportManager(folderManger);
 
             Assert.Throws<DirectoryNotFoundException>(() => reportManager.GenerateReport(testingDllDirectory));
         }

@@ -15,33 +15,35 @@
         private const string IndexHtmFileName = "index.htm";
 
         private HashSet<IReport> reports = new HashSet<IReport>();
-        private FileInfo rootDirectory;
 
-        public ReportManager(string reportsRootDirectory)
+        private IFolderManager folderManager;
+
+        public ReportManager(IFolderManager folderManager)
         {
-            var reportsRootDirectoryFileInfo = base.ConverToFileInfo(reportsRootDirectory);
-
-            this.RootDirectory = reportsRootDirectoryFileInfo;
+            this.FolderManger = folderManager;
         }
 
-        public ReportManager(string reportsRootDirectory, IValidate validator)
+        public ReportManager(IFolderManager folderManager, IValidate validator)
             : base(validator)
         {
-            var reportsRootDirectoryFileInfo = base.ConverToFileInfo(reportsRootDirectory);
-
-            this.RootDirectory = reportsRootDirectoryFileInfo;
+            this.FolderManger = folderManager;
         }
 
-        private FileInfo RootDirectory
+        private IFolderManager FolderManger
         {
             get
             {
-                return this.rootDirectory;
+                return this.folderManager;
             }
 
             set
             {
-                this.rootDirectory = value;
+                if (value == null)
+                {
+                    throw new ArgumentNullException(nameof(this.FolderManger));
+                }
+
+                this.folderManager = value;
             }
         }
 
@@ -63,22 +65,6 @@
             var testingDllDirectoryFileInfo = ConverToFileInfo(testingDllDirectory);
 
             throw new NotImplementedException();
-        }
-
-        protected override FileInfo ConverToFileInfo(string path)
-        {
-            if (base.Validator.CheckIfStringIsNullOrEmpty(path))
-            {
-                throw new ArgumentNullException();
-            }
-
-            if (!base.Validator.CheckIfFolderExistsAtInputPath(path))
-            {
-                throw new DirectoryNotFoundException(path);
-            }
-
-            var result = new FileInfo(path);
-            return result;
         }
     }
 }

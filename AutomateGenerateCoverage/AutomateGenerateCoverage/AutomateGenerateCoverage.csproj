@@ -43,6 +43,7 @@
     <Compile Include="Contracts\BatchFileGenerating\IBatchFileGenerator.cs" />
     <Compile Include="Contracts\BatchFileGenerating\IBatchFileLineGenerator.cs" />
     <Compile Include="Contracts\IO\IFileWriter.cs" />
+    <Compile Include="Contracts\Reports\IFolderManager.cs" />
     <Compile Include="Contracts\Reports\IReport.cs" />
     <Compile Include="Contracts\Reports\IReportManager.cs" />
     <Compile Include="Contracts\ITypeTranslator.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Models\Abstract\ValidatorProvider.cs" />
     <Compile Include="Models\IO\FileWriter.cs" />
     <Compile Include="Models\Reports\Abstract\ReportValidatorProvider.cs" />
+    <Compile Include="Models\Reports\FolderManagers\BasicFolderManager.cs" />
     <Compile Include="Models\Reports\Report.cs" />
     <Compile Include="Models\Reports\ReportManager.cs" />
     <Compile Include="Utils\BasicBatchFileLineParameterTypeTranslator.cs" />
