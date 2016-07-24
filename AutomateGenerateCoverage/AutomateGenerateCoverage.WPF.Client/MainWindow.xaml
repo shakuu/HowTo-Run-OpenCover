@@ -5,18 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutomateGenerateCoverage.WPF.Client"
         mc:Ignorable="d"
-        Title="MainWindow" Height="360" Width="640">
+        Title="Code Coverage Report" Height="315" Width="640">
+    <Window.Background>
+        <ImageBrush ImageSource="imgs/ninja.gif"></ImageBrush>
+    </Window.Background>
     <Grid>
         <Button x:Name="SelectTargetTestingLibraryBtn" 
                 Content="Select tests .dll" HorizontalAlignment="Left"
-                Margin="20,20,0,0" VerticalAlignment="Top"
+                Margin="20,35,0,0" VerticalAlignment="Top"
                 Width="160" Height="40"
                 FontFamily="consolas" FontSize="14" 
                 Background="#333333" Foreground="YellowGreen"
                 Click="SelectTargetTestingLibraryBtn_Click"/>
         <Button x:Name="GenerateBatFilesBtn" 
                 Content="Generate .bat" HorizontalAlignment="Left"
-                Margin="20,80,0,0" VerticalAlignment="Top"
+                Margin="20,95,0,0" VerticalAlignment="Top"
                 Width="160" Height="40"
                 FontFamily="consolas" FontSize="14" 
                 Background="#333333" Foreground="YellowGreen"
@@ -24,7 +27,7 @@
 
         <Button x:Name="RunTestsBtn" 
                 Content="Run Tests" HorizontalAlignment="Left"
-                Margin="20,140,0,0" VerticalAlignment="Top"
+                Margin="20,155,0,0" VerticalAlignment="Top"
                 Width="160" Height="40"
                 FontFamily="consolas" FontSize="14" 
                 Background="#333333" Foreground="YellowGreen"
@@ -32,19 +35,20 @@
 
         <Button x:Name="OpenInBroserBtn" 
                 Content="Open in browser" HorizontalAlignment="Left"
-                Margin="20,200,0,0" VerticalAlignment="Top"
+                Margin="20,215,0,0" VerticalAlignment="Top"
                 Width="160" Height="40"
                 FontFamily="consolas" FontSize="14" 
                 Background="#333333" Foreground="YellowGreen"
                 Click="OpenInBroserBtn_Click"/>
 
         <TextBox x:Name="SelectedFileTextBox" 
-                 HorizontalAlignment="Left" Height="290" 
-                 Margin="200,20,0,0" TextWrapping="Wrap" 
+                 HorizontalAlignment="Left" Height="220" 
+                 Margin="200,35,0,0" TextWrapping="Wrap" 
                  FontFamily="consolas" FontSize="12" 
                  Background="#333333" Foreground="YellowGreen"
                  Padding="5, 5"
-                 Text="TextBox" VerticalAlignment="Top" Width="400"/>
+                 Text="Select a testing .dll" VerticalAlignment="Top" Width="400"
+                 IsReadOnly="True"/>
 
     </Grid>
 </Window>

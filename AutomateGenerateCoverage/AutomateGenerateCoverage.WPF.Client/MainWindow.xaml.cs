@@ -47,27 +47,50 @@ namespace AutomateGenerateCoverage.WPF.Client
             SelectedFileTextBox.Text = myDialog.FileName;
         }
 
-        private void InitializeReportManager()
-        {
-            var folderManager = new BasicFolderManager(Environment.CurrentDirectory);
-            this.reportManager = new ReportManager(folderManager);
-        }
-
         private void GenerateBatFilesBtn_Click(object sender, RoutedEventArgs e)
         {
-            var targetDll = SelectedFileTextBox.Text;
-
-            this.latestReport = this.reportManager.GenerateReport(targetDll);
+            try
+            {
+                var targetDll = SelectedFileTextBox.Text;
+                this.latestReport = this.reportManager.GenerateReport(targetDll);
+                SelectedFileTextBox.Text = $"Successfully generated {latestReport.RunTestsBAT.Name}.";
+            }
+            catch (Exception)
+            {
+                SelectedFileTextBox.Text = "Select a valid testing library first.";
+            }
         }
 
         private void RunTestsBtn_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start(latestReport.RunTestsBAT.FullName);
+            try
+            {
+                SelectedFileTextBox.Text = $"Executing {latestReport.RunTestsBAT.Name}.";
+                Process.Start(latestReport.RunTestsBAT.FullName);
+            }
+            catch (Exception)
+            {
+                SelectedFileTextBox.Text = "Select a valid testing library and generate a batch file.";
+            }
         }
 
         private void OpenInBroserBtn_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start(latestReport.ReportHTML.FullName);
+            try
+            {
+                SelectedFileTextBox.Text = $"Opening {latestReport.ReportHTML.Name} in default browser.";
+                Process.Start(latestReport.ReportHTML.FullName);
+            }
+            catch (Exception)
+            {
+                SelectedFileTextBox.Text = "Select a valid testing library and generate a batch file.";
+            }
+        }
+
+        private void InitializeReportManager()
+        {
+            var folderManager = new BasicFolderManager(Environment.CurrentDirectory);
+            this.reportManager = new ReportManager(folderManager);
         }
     }
 }
