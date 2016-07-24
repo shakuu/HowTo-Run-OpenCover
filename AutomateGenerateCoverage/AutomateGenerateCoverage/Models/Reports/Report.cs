@@ -58,17 +58,24 @@
             }
         }
 
+        /// <summary>
+        /// Validation causes errors
+        /// .dll has been validated before
+        /// .htm is not created yet
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         protected override FileInfo ConvertToFileInfo(string path)
         {
-            if (base.Validator.CheckIfStringIsNullOrEmpty(path))
-            {
-                throw new ArgumentNullException();
-            }
+            //if (base.Validator.CheckIfStringIsNullOrEmpty(path))
+            //{
+            //    throw new ArgumentNullException();
+            //}
 
-            if (!base.Validator.CheckIfFileExistsAtInputPath(path))
-            {
-                throw new FileNotFoundException(path);
-            }
+            //if (!base.Validator.CheckIfFileExistsAtInputPath(path))
+            //{
+            //    throw new FileNotFoundException(path);
+            //}
 
             var result = new FileInfo(path);
             return result;

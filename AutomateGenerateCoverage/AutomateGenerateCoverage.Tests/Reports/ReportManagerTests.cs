@@ -52,13 +52,13 @@
             var folderManger = new BasicFolderManager(reportsRootDirectory);
             var reportManager = new ReportManager(folderManger);
 
-            Assert.Throws<DirectoryNotFoundException>(() => reportManager.GenerateReport(testingDllDirectory));
+            Assert.Throws<FileNotFoundException>(() => reportManager.GenerateReport(testingDllDirectory));
         }
 
         [Test]
         public void GenerateReport_ShouldReturnAValidReport_IfInputIsValid()
         {
-            string targetDirectory = @"D:\Homeworks";
+            string targetDirectory = "D:\\TestReports";
             string path = @"D:\GitHub\SantaseGameEngine\Source\Santase.Logic.Tests\bin\Debug\Santase.Logic.Tests.dll";
 
             var folderManager = new BasicFolderManager(targetDirectory);
