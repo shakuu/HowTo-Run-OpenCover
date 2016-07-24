@@ -18,7 +18,7 @@
             var testingDllLocationFileInfo = this.ConvertToFileInfo(testingDllLocation);
             var reportHTMLLocationFileInfo = this.ConvertToFileInfo(reportHTMLLocation);
 
-            this.TestingDLL = testingDllLocationFileInfo;
+            this.RunTestsBAT = testingDllLocationFileInfo;
             this.ReportHTML = reportHTMLLocationFileInfo;
         }
 
@@ -28,11 +28,11 @@
             var testingDllLocationFileInfo = this.ConvertToFileInfo(testingDllLocation);
             var reportHTMLLocationFileInfo = this.ConvertToFileInfo(reportHTMLLocation);
 
-            this.TestingDLL = testingDllLocationFileInfo;
+            this.RunTestsBAT = testingDllLocationFileInfo;
             this.ReportHTML = reportHTMLLocationFileInfo;
         }
 
-        public FileInfo TestingDLL
+        public FileInfo RunTestsBAT
         {
             get
             {

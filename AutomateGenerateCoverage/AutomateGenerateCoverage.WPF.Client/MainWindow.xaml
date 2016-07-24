@@ -9,14 +9,38 @@
     <Grid>
         <Button x:Name="SelectTargetTestingLibraryBtn" 
                 Content="Select tests .dll" HorizontalAlignment="Left"
-                Margin="23,35,0,0" VerticalAlignment="Top"
+                Margin="20,20,0,0" VerticalAlignment="Top"
                 Width="160" Height="40"
                 FontFamily="consolas" FontSize="14" 
                 Background="#333333" Foreground="YellowGreen"
                 Click="SelectTargetTestingLibraryBtn_Click"/>
+        <Button x:Name="GenerateBatFilesBtn" 
+                Content="Generate .bat" HorizontalAlignment="Left"
+                Margin="20,80,0,0" VerticalAlignment="Top"
+                Width="160" Height="40"
+                FontFamily="consolas" FontSize="14" 
+                Background="#333333" Foreground="YellowGreen"
+                Click="GenerateBatFilesBtn_Click"/>
+
+        <Button x:Name="RunTestsBtn" 
+                Content="Run Tests" HorizontalAlignment="Left"
+                Margin="20,140,0,0" VerticalAlignment="Top"
+                Width="160" Height="40"
+                FontFamily="consolas" FontSize="14" 
+                Background="#333333" Foreground="YellowGreen"
+                Click="RunTestsBtn_Click"/>
+
+        <Button x:Name="OpenInBroserBtn" 
+                Content="Open in browser" HorizontalAlignment="Left"
+                Margin="20,200,0,0" VerticalAlignment="Top"
+                Width="160" Height="40"
+                FontFamily="consolas" FontSize="14" 
+                Background="#333333" Foreground="YellowGreen"
+                Click="OpenInBroserBtn_Click"/>
+
         <TextBox x:Name="SelectedFileTextBox" 
-                 HorizontalAlignment="Left" Height="160" 
-                 Margin="200,35,0,0" TextWrapping="Wrap" 
+                 HorizontalAlignment="Left" Height="290" 
+                 Margin="200,20,0,0" TextWrapping="Wrap" 
                  FontFamily="consolas" FontSize="12" 
                  Background="#333333" Foreground="YellowGreen"
                  Padding="5, 5"

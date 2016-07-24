@@ -20,9 +20,11 @@
             this.RootFolder = reportsRootFolderFileInfo;
         }
 
-        public BasicFolderManager(IValidate validator)
+        public BasicFolderManager(string reportsRootFolder, IValidate validator)
             : base(validator)
         {
+            var reportsRootFolderFileInfo = this.ConvertToFileInfo(reportsRootFolder);
+            this.RootFolder = reportsRootFolderFileInfo;
         }
 
         private FileInfo RootFolder
@@ -42,10 +44,10 @@
         {
             var nextReportFolder = this.RootFolder + BasicFolderManager.ReportSubfolder;
 
-            if (Directory.Exists(nextReportFolder))
-            {
-                Directory.Delete(nextReportFolder, true);
-            }
+            //if (Directory.Exists(nextReportFolder))
+            //{
+            //    Directory.Delete(nextReportFolder, true);
+            //}
 
             Directory.CreateDirectory(nextReportFolder);
 
@@ -56,10 +58,10 @@
         {
             var nextBatFilesFolder = this.RootFolder + BasicFolderManager.BatFilesSubfolder;
 
-            if (Directory.Exists(nextBatFilesFolder))
-            {
-                Directory.Delete(nextBatFilesFolder, true);
-            }
+            //if (Directory.Exists(nextBatFilesFolder))
+            //{
+            //    Directory.Delete(nextBatFilesFolder, true);
+            //}
 
             Directory.CreateDirectory(nextBatFilesFolder);
 

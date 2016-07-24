@@ -4,7 +4,7 @@
 
     public interface IReport
     {
-        FileInfo TestingDLL { get; }
+        FileInfo RunTestsBAT { get; }
 
         FileInfo ReportHTML { get; }
     }
