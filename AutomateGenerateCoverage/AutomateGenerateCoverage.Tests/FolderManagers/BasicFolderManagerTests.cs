@@ -39,7 +39,7 @@
         [Test]
         public void GetNextFolder_ShouldReturnAValidString()
         {
-            var expectedNextFolder = "D:\\Homeworks\\reports";
+            var expectedNextFolder = "D:\\Homeworks\\reports\\report";
 
             var reportsRootFolder = "D:\\Homeworks";
             var folderManager = new BasicFolderManager(reportsRootFolder);

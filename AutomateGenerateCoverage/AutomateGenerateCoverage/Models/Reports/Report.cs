@@ -15,8 +15,8 @@
 
         public Report(string testingDllLocation, string reportHTMLLocation)
         {
-            var testingDllLocationFileInfo = this.ConverToFileInfo(testingDllLocation);
-            var reportHTMLLocationFileInfo = this.ConverToFileInfo(reportHTMLLocation);
+            var testingDllLocationFileInfo = this.ConvertToFileInfo(testingDllLocation);
+            var reportHTMLLocationFileInfo = this.ConvertToFileInfo(reportHTMLLocation);
 
             this.TestingDLL = testingDllLocationFileInfo;
             this.ReportHTML = reportHTMLLocationFileInfo;
@@ -25,8 +25,8 @@
         public Report(string testingDllLocation, string reportHTMLLocation, IValidate validator)
             : base(validator)
         {
-            var testingDllLocationFileInfo = this.ConverToFileInfo(testingDllLocation);
-            var reportHTMLLocationFileInfo = this.ConverToFileInfo(reportHTMLLocation);
+            var testingDllLocationFileInfo = this.ConvertToFileInfo(testingDllLocation);
+            var reportHTMLLocationFileInfo = this.ConvertToFileInfo(reportHTMLLocation);
 
             this.TestingDLL = testingDllLocationFileInfo;
             this.ReportHTML = reportHTMLLocationFileInfo;
@@ -58,7 +58,7 @@
             }
         }
 
-        protected override FileInfo ConverToFileInfo(string path)
+        protected override FileInfo ConvertToFileInfo(string path)
         {
             if (base.Validator.CheckIfStringIsNullOrEmpty(path))
             {

@@ -3,5 +3,7 @@
     public interface IFolderManager
     {
         string GetNextReportFolder();
+
+        string GetNextBatFilesFolder();
     }
 }

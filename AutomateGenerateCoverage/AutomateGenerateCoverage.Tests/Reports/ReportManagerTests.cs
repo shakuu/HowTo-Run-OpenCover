@@ -54,5 +54,19 @@
 
             Assert.Throws<DirectoryNotFoundException>(() => reportManager.GenerateReport(testingDllDirectory));
         }
+
+        [Test]
+        public void GenerateReport_ShouldReturnAValidReport_IfInputIsValid()
+        {
+            string targetDirectory = @"D:\Homeworks";
+            string path = @"D:\GitHub\SantaseGameEngine\Source\Santase.Logic.Tests\bin\Debug\Santase.Logic.Tests.dll";
+
+            var folderManager = new BasicFolderManager(targetDirectory);
+            var reportManager = new ReportManager(folderManager);
+
+            var actualResult = reportManager.GenerateReport(path);
+
+            Assert.NotNull(actualResult);
+        }
     }
 }

@@ -9,6 +9,6 @@
     {
         ICollection<IReport> AllReports { get; }
 
-        ICollection<FileInfo> GenerateReport(string testingDllDirectory);
+        IReport GenerateReport(string testingDllDirectory);
     }
 }

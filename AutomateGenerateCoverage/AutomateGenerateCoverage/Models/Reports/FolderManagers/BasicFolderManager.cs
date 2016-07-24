@@ -8,13 +8,15 @@
 
     public class BasicFolderManager : ReportValidatorProvider, IFolderManager
     {
-        private const string ReportsSubfolder = "\\reports";
+        private const string BatFilesSubfolder = "\\reports";
+        private const string ReportSubfolder = "\\reports\\report";
+
 
         private FileInfo rootFolder;
 
         public BasicFolderManager(string reportsRootFolder)
         {
-            var reportsRootFolderFileInfo = this.ConverToFileInfo(reportsRootFolder);
+            var reportsRootFolderFileInfo = this.ConvertToFileInfo(reportsRootFolder);
             this.RootFolder = reportsRootFolderFileInfo;
         }
 
@@ -38,7 +40,7 @@
 
         public string GetNextReportFolder()
         {
-            var nextReportFolder = this.RootFolder + BasicFolderManager.ReportsSubfolder;
+            var nextReportFolder = this.RootFolder + BasicFolderManager.ReportSubfolder;
 
             if (Directory.Exists(nextReportFolder))
             {
@@ -48,6 +50,20 @@
             Directory.CreateDirectory(nextReportFolder);
 
             return nextReportFolder;
+        }
+
+        public string GetNextBatFilesFolder()
+        {
+            var nextBatFilesFolder = this.RootFolder + BasicFolderManager.BatFilesSubfolder;
+
+            if (Directory.Exists(nextBatFilesFolder))
+            {
+                Directory.Delete(nextBatFilesFolder, true);
+            }
+
+            Directory.CreateDirectory(nextBatFilesFolder);
+
+            return nextBatFilesFolder;
         }
     }
 }

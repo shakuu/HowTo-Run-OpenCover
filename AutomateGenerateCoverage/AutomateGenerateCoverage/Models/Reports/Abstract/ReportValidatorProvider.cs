@@ -18,7 +18,7 @@
         {
         }
 
-        protected virtual FileInfo ConverToFileInfo(string path)
+        protected virtual FileInfo ConvertToFileInfo(string path)
         {
             if (base.Validator.CheckIfStringIsNullOrEmpty(path))
             {
