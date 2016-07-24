@@ -77,7 +77,7 @@
                 testingDllDirectoryFileInfo.FullName,
                 targetDirectory,
                 outputFileNames);
-            // TODO:
+            
             var currentReport = this.GenerateReport(batFilesDirectory + ReportManager.GetReportFileName, targetDirectory);
 
             this.reports.Add(currentReport);
