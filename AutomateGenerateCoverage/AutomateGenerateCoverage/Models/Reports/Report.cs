@@ -1,21 +1,21 @@
 ﻿namespace AutomateGenerateCoverage.Models.Reports
 {
-    using System;
     using System.IO;
 
     using AutomateGenerateCoverage.Contracts;
     using AutomateGenerateCoverage.Contracts.Reports;
-    using AutomateGenerateCoverage.Models.Abstract;
+    using AutomateGenerateCoverage.Models.Reports.Abstract;
 
-    public class Report : ValidatorProvider, IReport
+    // TODO: Overload GetHash()
+    public class Report : ReportValidatorProvider, IReport
     {
         private FileInfo testingDll;
         private FileInfo reportHTML;
 
         public Report(string testingDllLocation, string reportHTMLLocation)
         {
-            var testingDllLocationFileInfo = this.ConverToFileInfo(testingDllLocation);
-            var reportHTMLLocationFileInfo = this.ConverToFileInfo(reportHTMLLocation);
+            var testingDllLocationFileInfo = base.ConverToFileInfo(testingDllLocation);
+            var reportHTMLLocationFileInfo = base.ConverToFileInfo(reportHTMLLocation);
 
             this.TestingDLL = testingDllLocationFileInfo;
             this.ReportHTML = reportHTMLLocationFileInfo;
@@ -55,22 +55,6 @@
             {
                 this.reportHTML = value;
             }
-        }
-
-        private FileInfo ConverToFileInfo(string path)
-        {
-            if (base.Validator.CheckIfStringIsNullOrEmpty(path))
-            {
-                throw new ArgumentNullException();
-            }
-
-            if (!base.Validator.CheckIfFileExistsAtInputPath(path))
-            {
-                throw new FileNotFoundException(path);
-            }
-
-            var result = new FileInfo(path);
-            return result;
         }
     }
 }

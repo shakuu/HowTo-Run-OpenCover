@@ -79,6 +79,7 @@
     <Compile Include="PathFinders\PackageExecutablePathFinderTests.cs" />
     <Compile Include="PathFinders\RootPathFinderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\ReportManagerTests.cs" />
     <Compile Include="Reports\ReportTests.cs" />
     <Compile Include="Utils\BasicBatchFileLineParameterTypeTranslatorTests.cs" />
     <Compile Include="Utils\BasicNugetPackageTypeTranslatorTests.cs" />

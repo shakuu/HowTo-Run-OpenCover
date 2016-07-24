@@ -7,8 +7,8 @@
 
     public interface IReportManager
     {
-        ICollection<FileInfo> GenerateReport(string testingDllDirectory);
+        ICollection<IReport> AllReports { get; }
 
-        ICollection<IReport> GetAllReports();
+        ICollection<FileInfo> GenerateReport(string testingDllDirectory);
     }
 }
