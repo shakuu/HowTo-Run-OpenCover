@@ -77,7 +77,7 @@
                 testingDllDirectoryFileInfo.FullName,
                 targetDirectory,
                 outputFileNames);
-            
+
             var currentReport = this.GenerateReport(batFilesDirectory + ReportManager.GetReportFileName, targetDirectory);
 
             this.reports.Add(currentReport);
@@ -100,7 +100,11 @@
             return outputFileNames;
         }
 
-        private IBatchFileGenerator InitializeBatchFileGenerator()
+        /// <summary>
+        /// Testing entry point.
+        /// </summary>
+        /// <returns></returns>
+        protected virtual IBatchFileGenerator InitializeBatchFileGenerator()
         {
             var packageTypeTranslator = new BasicNugetPackageTypeTranslator();
             var batchFileLineParameterTypeTranslator = new BasicBatchFileLineParameterTypeTranslator();
