@@ -1,17 +1,14 @@
 ﻿namespace AutomateGenerateCoverage.WPF.Client
 {
     using Microsoft.Win32;
-    using System.Diagnostics;
     using System;
+    using System.Diagnostics;
     using System.Windows;
 
     using AutomateGenerateCoverage.Contracts.Reports;
     using AutomateGenerateCoverage.Models.Reports;
     using AutomateGenerateCoverage.Models.Reports.FolderManagers;
 
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class Startup : Window
     {
         private const string DefaultFolder = "D:\\Github";
@@ -53,6 +50,7 @@
             {
                 SelectedFileTextBox.Text = $"Executing {latestReport.RunTestsBAT.Name}.";
                 Process.Start(latestReport.RunTestsBAT.FullName);
+                SelectedFileTextBox.Text = $"Executing {latestReport.RunTestsBAT.Name} - Complete.";
             }
             catch (Exception)
             {
@@ -66,6 +64,7 @@
             {
                 SelectedFileTextBox.Text = $"Opening {latestReport.ReportHTML.Name} in default browser.";
                 Process.Start(latestReport.ReportHTML.FullName);
+                SelectedFileTextBox.Text = $"Opening {latestReport.ReportHTML.Name} in default browser - Complete.";
             }
             catch (Exception)
             {
